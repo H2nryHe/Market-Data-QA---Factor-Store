@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "market-data-qa-factor-store"
+version = "0.1.0"
+description = "Scaffold for market data QA and factor store workflows"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Market Data QA Team" }]
+dependencies = [
+  "polars>=1.0.0",
+  "pyarrow>=14.0.0",
+  "pydantic>=2.0.0",
+  "typer>=0.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.6.0",
+  "black>=24.0.0",
+]
+
+[project.scripts]
+mdqfs = "validators.cli:app"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["features*", "validators*", "versioning*", "schemas*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = [
+  "E501", 
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/cli.py" = ["B008"] 
