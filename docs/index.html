@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Market Data QA + Factor Store</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 40px; line-height: 1.5; }
+    h1 { margin: 0 0 8px; }
+    .sub { color: #555; margin: 0 0 24px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
+    pre { background: #f7f7f7; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .muted { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>Market Data QA + Factor Store</h1>
+  <p class="sub">Schema contracts → validators → immutable snapshots → deterministic factor materialization</p>
+
+  <div class="card">
+    <h2>What this is</h2>
+    <p>
+      A compact, production-style reference project for building reliable market data pipelines:
+      explicit schema contracts, composable QA validators with structured reports, checksummed snapshots,
+      and deterministic feature materialization (factor store style).
+    </p>
+    <p class="muted">
+      Repo: <code>H2nryHe/Market-Data-QA---Factor-Store</code>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>10-second demo</h2>
+    <p>Run the end-to-end smoke pipeline (validate → snapshot → verify → materialize):</p>
+    <pre><code>bash ci/sample_pipeline.sh</code></pre>
+    <p>Expected artifacts (paths):</p>
+    <pre><code>data/qa/validation_report_pipeline.json
+data/snapshots/market_ohlcv/&lt;snapshot_id&gt;/manifest.json
+data/features/market_ohlcv/&lt;cache_key&gt;/features.parquet
+data/features/market_ohlcv/&lt;cache_key&gt;/feature_manifest.json</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>Architecture</h2>
+    <pre><code>CSV sample/raw input
+      |
+      v
+[schemas/*] contract checks (columns/dtypes/rules)
+      |
+      v
+[validators/*] structural + duplicates + temporal + outliers
+      |  (JSON report, PASS/WARN/FAIL, non-zero exit on FAIL)
+      v
+[versioning/*] snapshot -> data.parquet + manifest.json + checksums
+      |
+      v
+[features/*] factor materialization from snapshot only
+      |  (deterministic sort + cache key from checksum/config/version)
+      v
+features.parquet + feature_manifest.json</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>Quickstart (local)</h2>
+    <pre><code>python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e '.[dev]'
+ruff check .
+black --check .
+pytest -q</code></pre>
+  </div>
+
+  <p class="muted">
+    Tip: publish this page via GitHub Pages (Settings → Pages → Deploy from branch → main /docs).
+  </p>
+</body>
+</html>

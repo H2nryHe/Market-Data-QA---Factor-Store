@@ -1,5 +1,11 @@
 # Market Data QA + Factor Store
 
+## Live docs (GitHub Pages)
+
+Enable Pages: Settings → Pages → Deploy from branch → `main` + `/docs`.
+Then use the URL GitHub shows on that page.
+
+
 A compact, production-style reference project for **reliable market data pipelines**:
 
 - explicit schema contracts
