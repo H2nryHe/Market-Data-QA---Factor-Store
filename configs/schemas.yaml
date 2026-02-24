@@ -1,0 +1,51 @@
+required_columns:
+  - symbol
+  - timestamp
+  - open
+  - high
+  - low
+  - close
+  - volume
+  - source
+  - ingested_at
+
+columns:
+  symbol:
+    dtype: str
+    nullable: false
+  timestamp:
+    dtype: datetime
+    nullable: false
+  open:
+    dtype: float
+    nullable: false
+  high:
+    dtype: float
+    nullable: false
+  low:
+    dtype: float
+    nullable: false
+  close:
+    dtype: float
+    nullable: false
+  volume:
+    dtype: int
+    nullable: false
+  source:
+    dtype: str
+    nullable: false
+  ingested_at:
+    dtype: datetime
+    nullable: false
+
+validation_policy:
+  strict_types: true
+  allow_extra_columns: false
+
+rules:
+  enforce_ohlc_consistency: true
+  enforce_non_negative_volume: true
+  uniqueness_key:
+    - symbol
+    - timestamp
+    - source

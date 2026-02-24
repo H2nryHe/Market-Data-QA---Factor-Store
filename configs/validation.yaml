@@ -1,0 +1,24 @@
+schema_config_path: configs/schemas.yaml
+report_sample_limit: 3
+
+validators:
+  structural:
+    enabled: true
+    severity: HIGH
+  duplicates:
+    enabled: true
+    severity: HIGH
+    key_columns: [symbol, timestamp, source]
+  temporal:
+    enabled: true
+    severity: MEDIUM
+    group_by: [symbol, source]
+    max_gap_days: 3
+  outliers:
+    enabled: true
+    severity: MEDIUM
+    method: mad
+    fields: [open, high, low, close]
+    z_threshold: 6.0
+    min_group_size: 5
+    group_by: [symbol]
