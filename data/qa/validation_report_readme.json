@@ -1,0 +1,43 @@
+{
+  "dataset_path": "data/sample/market_ohlcv_sample.csv",
+  "generated_at": "2026-02-24T07:02:51.386027Z",
+  "overall_status": "PASS",
+  "results": [
+    {
+      "validator": "structural",
+      "status": "PASS",
+      "severity": "HIGH",
+      "affected_row_count": 0,
+      "rule": "schema.structural+business",
+      "message": "Structural schema and business-rule checks passed.",
+      "sample_rows": []
+    },
+    {
+      "validator": "duplicates",
+      "status": "PASS",
+      "severity": "HIGH",
+      "affected_row_count": 0,
+      "rule": "duplicates.key=['symbol', 'timestamp', 'source']",
+      "message": "No duplicate uniqueness-key rows found.",
+      "sample_rows": []
+    },
+    {
+      "validator": "temporal",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "affected_row_count": 0,
+      "rule": "temporal.group_by=['symbol', 'source'], max_gap_days=3",
+      "message": "Temporal checks passed.",
+      "sample_rows": []
+    },
+    {
+      "validator": "outliers",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "affected_row_count": 0,
+      "rule": "outliers.method=mad, z_threshold=6.0, min_group_size=5, fields=['open', 'high', 'low', 'close']",
+      "message": "No outliers detected by configured MAD policy.",
+      "sample_rows": []
+    }
+  ]
+}

@@ -18,6 +18,8 @@ dist/
 
 # Local data outputs
 data/raw/
+data/qa/*.json
+!data/qa/validation_report_readme.json
 data/snapshots/
 data/features/
 
