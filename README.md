@@ -2,8 +2,7 @@
 
 ## Live docs (GitHub Pages)
 
-Enable Pages: Settings → Pages → Deploy from branch → `main` + `/docs`.
-Then use the URL GitHub shows on that page.
+https://h2nryhe.github.io/Market-Data-QA---Factor-Store/
 
 
 A compact, production-style reference project for **reliable market data pipelines**:
